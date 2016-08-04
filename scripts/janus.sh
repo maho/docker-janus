@@ -33,19 +33,23 @@ debug_level=4
 [webserver]
 base_path=/janus
 threads=unlimited
-http=no
-https=yes
-secure_port=8089
-
-[admin]
-admin_base_path=/admin
-admin_threads=unlimited
-admin_http=no
-admin_https=yes
-admin_secure_port=7889
-; admin_acl=127.0.0.1
+http=yes
+port=8089
+https=no
 
 [certificates]
 cert_pem=$DEPS_HOME/certs/janus.pem
 cert_key=$DEPS_HOME/certs/janus.key
+EOF
+
+cat << EOF > $DEPS_HOME/etc/janus/janus.plugin.streaming.cfg
+[gstreamer]
+type = rtp
+id = 1
+description = Stream from gstreamer
+audio = no
+video = yes
+videoport = 6000
+videopt = 96
+videortpmap = VP8/90000
 EOF
