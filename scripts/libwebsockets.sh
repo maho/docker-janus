@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-git clone https://github.com/warmcat/libwebsockets.git -b v1.5-chrome47-firefox41 $DEPS_HOME/dl/libwebsockets
+git clone https://github.com/warmcat/libwebsockets.git -b v2.0.2 $DEPS_HOME/dl/libwebsockets
 cd $DEPS_HOME/dl/libwebsockets
 mkdir build
 cd build
