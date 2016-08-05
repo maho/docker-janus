@@ -39,4 +39,7 @@ ENV JANUS_RELEASE="v0.1.1"
 ADD scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
 
+ADD scripts/config.sh $SCRIPTS_PATH/
+RUN $SCRIPTS_PATH/config.sh
+
 CMD ["/root/janus/bin/janus"]
