@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Test Stream</title>
+<script type="text/javascript" src="janus.nojquery.js"></script>
+</head>
+<body>
+<div id="stream"></div>
+<script type="text/javascript">
+var janus;
+var streamHandle;
+var streamDiv = document.getElementById('stream');
+
+(function init() {
+  Janus.init({
+    debug: false,
+    callback: function() {
+      console.log('janus initialized');
+      establish();
+    }
+  });
+})();
+
+function establish() {
+  janus = new Janus({
+    server: [
+      'ws://localhost:8188/',
+      'http://localhost:8088/janus'
+    ],
+    success: function() {
+      console.log('janus connection established:', janus.getServer());
+      attach();
+    },
+    error: function(cause) {
+      console.error(cause);
+    },
+    destroyed: function() {
+    }
+  });
+}
+
+function attach() {
+  janus.attach({
+    plugin: 'janus.plugin.streaming',
+    success: function(pluginHandle) {
+      console.log('attached to streaming plugin with handle:', pluginHandle);
+      streamHandle = pluginHandle;
+
+      getStreams();
+    },
+    error: function(cause) {
+      console.error(cause);
+    },
+    onmessage: function(msg, jsep) {
+      if (jsep !== undefined && jsep !== null) {
+        console.log('handling sdp:', jsep);
+        streamHandle.createAnswer({
+          jsep: jsep,
+          media: { audioSend: false, videoSend: false },
+          success: function(ourJsep) {
+            var body = { request: 'start' };
+            streamHandle.send({ message: body, jsep: ourJsep });
+          },
+          error: function (cause) {
+            console.error(cause);
+          }
+        });
+      }
+    },
+    onremotestream: function(stream) {
+      console.log('got remote stream:', stream);
+      var video = document.createElement('video');
+      video.autoplay = true;
+      streamDiv.appendChild(video);
+      attachMediaStream(video, stream);
+    }
+  });
+}
+
+function getStreams() {
+  var body = { request: 'list' };
+  streamHandle.send({
+    message: body,
+    success: function(response) {
+      console.log('stream list response:', response);
+      var firstId = response.list[0].id;
+      startStream(firstId);
+    },
+    error: function (cause) {
+      console.error(cause);
+    }
+  });
+}
+
+function startStream(id) {
+  var body = { request: 'watch', id: id };
+  streamHandle.send({
+    message: body,
+    error: function (cause) {
+      console.error(cause);
+    }
+  });
+}
+</script>
+</body>
+</html>
