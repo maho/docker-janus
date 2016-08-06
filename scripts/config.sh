@@ -6,6 +6,10 @@ configs_folder = $DEPS_HOME/etc/janus
 plugins_folder = $DEPS_HOME/lib/janus/plugins
 debug_level = 4
 
+[nat]
+stun_server = stun.l.google.com
+stun_port = 19302
+
 [certificates]
 cert_pem = $DEPS_HOME/certs/janus.pem
 cert_key = $DEPS_HOME/certs/janus.key
