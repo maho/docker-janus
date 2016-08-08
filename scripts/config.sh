@@ -20,7 +20,7 @@ cat << EOF > $DEPS_HOME/etc/janus/janus.transport.http.cfg
 base_path = /janus
 threads = unlimited
 http = yes
-port = 8089
+port = 8188
 https = no
 
 [certificates]
@@ -31,7 +31,7 @@ EOF
 cat << EOF > $DEPS_HOME/etc/janus/janus.transport.websockets.cfg
 [general]
 ws = yes
-ws_port = 8188
+ws_port = 8189
 wss = no
 
 [certificates]

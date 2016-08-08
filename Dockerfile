@@ -42,4 +42,6 @@ RUN $SCRIPTS_PATH/janus.sh
 ADD scripts/config.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/config.sh
 
+EXPOSE 8188 8189
+
 CMD ["/root/janus/bin/janus"]

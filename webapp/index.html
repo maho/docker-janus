@@ -24,8 +24,8 @@ var streamDiv = document.getElementById('stream');
 function establish() {
   janus = new Janus({
     server: [
-      'ws://localhost:8188/',
-      'http://localhost:8088/janus'
+      'ws://localhost:8189/',
+      'http://localhost:8188/janus'
     ],
     success: function() {
       console.log('janus connection established:', janus.getServer());
