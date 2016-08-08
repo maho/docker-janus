@@ -27,20 +27,20 @@ RUN apt-get -y update && apt-get install -y libmicrohttpd-dev \
   wget \
  && rm -rf /var/lib/apt/lists/*
 
-ADD scripts/bootstrap.sh $SCRIPTS_PATH/
+COPY scripts/bootstrap.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/bootstrap.sh
 
-ADD scripts/usrsctp.sh $SCRIPTS_PATH/
+COPY scripts/usrsctp.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/usrsctp.sh
 
-ADD scripts/libwebsockets.sh $SCRIPTS_PATH/
+COPY scripts/libwebsockets.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/libwebsockets.sh
 
 ENV JANUS_RELEASE="v0.1.1"
-ADD scripts/janus.sh $SCRIPTS_PATH/
+COPY scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
 
-ADD scripts/config.sh $SCRIPTS_PATH/
+COPY scripts/config.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/config.sh
 
 EXPOSE 8188 8189
