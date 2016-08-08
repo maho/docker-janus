@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 # create a self signed cert for the server
 mkdir -p $DEPS_HOME/certs/
