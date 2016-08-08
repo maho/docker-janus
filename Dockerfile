@@ -24,7 +24,8 @@ RUN apt-get -y update && apt-get install -y libmicrohttpd-dev \
   subversion \
   git \
   cmake \
-  wget
+  wget \
+ && rm -rf /var/lib/apt/lists/*
 
 ADD scripts/bootstrap.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/bootstrap.sh
