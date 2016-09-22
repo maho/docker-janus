@@ -40,13 +40,33 @@ cert_key = $DEPS_HOME/certs/janus.key
 EOF
 
 cat << EOF > $DEPS_HOME/etc/janus/janus.plugin.streaming.cfg
-[gstreamer]
+[stream0]
 type = rtp
-id = 1
-description = Stream from gstreamer
+id = 0
+description = Mirror: left_one
 audio = no
 video = yes
 videoport = 6000
+videopt = 96
+videortpmap = VP8/90000
+
+[stream1]
+type = rtp
+id = 1
+description = Mirror: center
+audio = no
+video = yes
+videoport = 6001
+videopt = 96
+videortpmap = VP8/90000
+
+[stream2]
+type = rtp
+id = 2
+description = Mirror: right_one
+audio = no
+video = yes
+videoport = 6002
 videopt = 96
 videortpmap = VP8/90000
 EOF
