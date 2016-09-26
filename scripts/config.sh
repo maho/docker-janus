@@ -43,7 +43,7 @@ cat << EOF > $DEPS_HOME/etc/janus/janus.plugin.streaming.cfg
 [stream0]
 type = rtp
 id = 1
-description = Mirror: left_one
+description = left_one
 audio = no
 video = yes
 videoport = 6000
@@ -53,7 +53,7 @@ videortpmap = VP8/90000
 [stream1]
 type = rtp
 id = 2
-description = Mirror: center
+description = center
 audio = no
 video = yes
 videoport = 6001
@@ -63,7 +63,7 @@ videortpmap = VP8/90000
 [stream2]
 type = rtp
 id = 3
-description = Mirror: right_one
+description = right_one
 audio = no
 video = yes
 videoport = 6002
