@@ -2,18 +2,21 @@
 <html>
 <head>
 <title>Test Stream</title>
-<script type="text/javascript" src="janus.nojquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/6.4.0/adapter.min.js"></script>
+<script src="https://janus.conf.meetecho.com/janus.js"></script>
 </head>
 <body>
 <div id="stream"></div>
 <script type="text/javascript">
+var playing = false;
 var janus;
 var streamHandle;
 var streamDiv = document.getElementById('stream');
 
 (function init() {
   Janus.init({
-    debug: false,
+    debug: "all",
+    dependencies: Janus.useDefaultDependencies(),
     callback: function() {
       console.log('janus initialized');
       establish();
@@ -40,8 +43,10 @@ function establish() {
 }
 
 function attach() {
+  const opaqueId = "streamingtest-"+Janus.randomString(12);
   janus.attach({
     plugin: 'janus.plugin.streaming',
+    opaqueId: opaqueId,
     success: function(pluginHandle) {
       console.log('attached to streaming plugin with handle:', pluginHandle);
       streamHandle = pluginHandle;
@@ -68,16 +73,21 @@ function attach() {
       }
     },
     onremotestream: function(stream) {
+      if (playing) return;
+      playing = true;
       console.log('got remote stream:', stream);
       var video = document.createElement('video');
+      video.muted = true;
+      video.playsinline = true;
       video.autoplay = true;
       streamDiv.appendChild(video);
-      attachMediaStream(video, stream);
+      Janus.attachMediaStream(video, stream);
     }
   });
 }
 
 function getStreams() {
+  console.log('gstStreams()');
   var body = { request: 'list' };
   streamHandle.send({
     message: body,
@@ -93,6 +103,7 @@ function getStreams() {
 }
 
 function startStream(id) {
+  console.log('starting stream', id);
   var body = { request: 'watch', id: id };
   streamHandle.send({
     message: body,

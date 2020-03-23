@@ -17,9 +17,10 @@ wget https://github.com/meetecho/janus-gateway/archive/$JANUS_RELEASE.tar.gz -O 
 
 cd $DEPS_HOME/dl
 tar xf janus.tar.gz
-cd janus*
+cd janus-gateway-*
 ./autogen.sh
 
-./configure --prefix=$DEPS_HOME --enable-websockets --disable-rabbitmq --disable-docs
+./configure --prefix=$DEPS_HOME --enable-websockets --disable-rabbitmq --disable-mqtt --disable-data-channels --disable-docs
+export PKG_CONFIG_PATH="$DEPS_HOME"
 make
 make install

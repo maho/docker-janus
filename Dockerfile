@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:18.04
 
 # bootstrap environment
 ENV DEPS_HOME="/root/janus"
@@ -6,10 +6,10 @@ ENV SCRIPTS_PATH="/tmp/scripts"
 
 # install baseline package dependencies
 RUN apt-get -y update && apt-get install -y libmicrohttpd-dev \
+  libconfig-dev \
   libjansson-dev \
-  libnice-dev \
   libssl-dev \
-  libsrtp-dev \
+  libsrtp2-dev \
   libsofia-sip-ua-dev \
   libglib2.0-dev \
   libopus-dev \
@@ -18,6 +18,7 @@ RUN apt-get -y update && apt-get install -y libmicrohttpd-dev \
   libcollection-dev \
   pkg-config \
   gengetopt \
+  gtk-doc-tools \
   libtool \
   automake \
   build-essential \
@@ -27,16 +28,21 @@ RUN apt-get -y update && apt-get install -y libmicrohttpd-dev \
   wget \
  && rm -rf /var/lib/apt/lists/*
 
+ENV LD_LIBRARY_PATH=/root/janus/lib
+
 COPY scripts/bootstrap.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/bootstrap.sh
 
 COPY scripts/usrsctp.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/usrsctp.sh
 
+COPY scripts/libnice.sh $SCRIPTS_PATH/
+RUN $SCRIPTS_PATH/libnice.sh
+
 COPY scripts/libwebsockets.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/libwebsockets.sh
 
-ENV JANUS_RELEASE="v0.1.1"
+ENV JANUS_RELEASE="v0.9.1"
 COPY scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
 
