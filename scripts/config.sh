@@ -40,13 +40,31 @@ cert_key = $DEPS_HOME/certs/janus.key
 EOF
 
 cat << EOF > $DEPS_HOME/etc/janus/janus.plugin.streaming.cfg
-[stream0]
+[stream1]
 type = rtp
 id = 1
-description = stream
+description = stream1
 audio = no
 video = yes
 videoport = 6000
+videopt = 96
+videortpmap = VP8/90000
+[stream2]
+type = rtp
+id = 2
+description = stream2
+audio = no
+video = yes
+videoport = 6001
+videopt = 96
+videortpmap = VP8/90000
+[stream3]
+type = rtp
+id = 3
+description = stream3
+audio = no
+video = yes
+videoport = 6002
 videopt = 96
 videortpmap = VP8/90000
 EOF
