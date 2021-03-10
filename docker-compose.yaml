@@ -1,0 +1,12 @@
+version: "3"
+
+
+services:
+    stream:
+        build: .
+        volumes:
+            - /dev/video0:/dev/video0
+        ports:
+            - "8087:8087"
+        privileged: true
+
