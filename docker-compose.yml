@@ -15,3 +15,9 @@ services:
             - "6000-6002:6000-6002/udp"
     videosrc:
         build: gst_test
+        volumes:
+            - /dev/video0:/dev/video0
+        environment:
+            JANUS_SERVER: janus
+            VIDEO_DEVICE: /dev/video0
+        privileged: true
