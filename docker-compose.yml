@@ -12,7 +12,8 @@ services:
         ports:
             - "8188:8188"
             - "8189:8189"
-            - "6000-6002:6000-6002/udp"
+            - "5002:5002/udp"
+            - "5004:5004/udp"
     videosrc:
         build: gst_test
         volumes:
