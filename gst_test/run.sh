@@ -8,12 +8,13 @@ VIDEO_DEVICE=${VIDEO_DEVICE:-/dev/video0}
 
 
 gst-launch-1.0 \
-  audiotestsrc ! \
-    audioresample ! audio/x-raw,channels=1,rate=16000 ! \
-    opusenc bitrate=20000 ! \
-      rtpopuspay ! udpsink host=$SERVER port=5002 \
-  videotestsrc ! \
-    video/x-raw,width=320,height=240,framerate=15/1 ! \
+    audiotestsrc ! \
+      audioresample ! audio/x-raw,channels=1,rate=16000 ! \
+      opusenc bitrate=20000 ! \
+        rtpopuspay ! udpsink host=$SERVER port=5002 \
+    \
+    v4l2src device=/dev/video0 ! \
+    video/x-raw,width=$WIDTH,height=$HEIGHT,framerate=15/1 ! \
     videoscale ! videorate ! videoconvert ! timeoverlay ! \
     vp8enc error-resilient=1 ! \
       rtpvp8pay ! udpsink host=$SERVER port=5004
