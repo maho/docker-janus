@@ -21,5 +21,6 @@ services:
             - /dev/snd:/dev/snd
         environment:
             JANUS_SERVER: janus
-            VIDEO_DEVICE: /dev/video0
+            VIDEO_DEVICE:
+            ALSA_DEVICE:
         privileged: true
