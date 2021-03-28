@@ -6,7 +6,10 @@
 <script src="https://janus.conf.meetecho.com/janus.js"></script>
 </head>
 <body>
-<div id="stream"></div>
+Below is the stream
+<hr>
+    <div id="stream"></div>
+<hr>
 <script type="text/javascript">
 var playing = false;
 var janus;
@@ -25,10 +28,11 @@ var streamDiv = document.getElementById('stream');
 })();
 
 function establish() {
+  var hname = window.location.hostname;
   janus = new Janus({
     server: [
-      'ws://localhost:8189/',
-      'http://localhost:8188/janus'
+      'ws://' + hname + ':8189/',
+      'http://' + hname + ':8188/janus'
     ],
     success: function() {
       console.log('janus connection established:', janus.getServer());
