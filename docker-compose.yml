@@ -18,6 +18,7 @@ services:
         build: gst_test
         volumes:
             - /dev/video0:/dev/video0
+            - /dev/snd:/dev/snd
         environment:
             JANUS_SERVER: janus
             VIDEO_DEVICE: /dev/video0
