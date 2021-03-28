@@ -1,10 +1,10 @@
 FROM ubuntu:20.04
 
 
-RUN apt-get update -y  # TODO: merge it with rest of commands
-RUN apt-get install -y gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-plugins-rtp
-RUN apt-get install -y gstreamer1.0-tools
-# TODO: cleanup of files
+RUN apt-get update -y && \
+    apt-get install -y gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-plugins-rtp \
+    gstreamer1.0-tools gstreamer1.0-alsa && \
+    apt-get clean -y
 
 
 ADD run.sh /run.sh
