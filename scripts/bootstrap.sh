@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 # dependency locations (no sudo required)
-mkdir -p $DEPS_HOME/dl
-mkdir -p $DEPS_HOME/share
+mkdir -p /janus/dl
+mkdir -p /janus/share
 
-cat << EOF > $DEPS_HOME/share/config.site
-CPPFLAGS=-I$DEPS_HOME/include
-LDFLAGS=-L$DEPS_HOME/lib
+cat << EOF > /janus/share/config.site
+CPPFLAGS=-I/janus/include
+LDFLAGS=-L/janus/lib
 EOF

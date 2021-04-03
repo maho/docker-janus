@@ -1,7 +1,6 @@
 FROM ubuntu:18.04
 
 # bootstrap environment
-ENV DEPS_HOME="/root/janus"
 ENV SCRIPTS_PATH="/tmp/scripts"
 
 # install baseline package dependencies
@@ -28,7 +27,7 @@ RUN apt-get -y update && apt-get install -y libmicrohttpd-dev \
   wget \
  && rm -rf /var/lib/apt/lists/*
 
-ENV LD_LIBRARY_PATH=/root/janus/lib
+ENV LD_LIBRARY_PATH=/janus/lib
 
 COPY scripts/bootstrap.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/bootstrap.sh
@@ -46,9 +45,9 @@ ENV JANUS_RELEASE="v0.9.1"
 COPY scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
 
-COPY scripts/config.sh $SCRIPTS_PATH/
-RUN $SCRIPTS_PATH/config.sh
+
+COPY config/janus /janus/etc/janus
 
 EXPOSE 8188 8189 5002/udp 5004/udp
 
-CMD ["/root/janus/bin/janus"]
+CMD ["/janus/bin/janus"]
