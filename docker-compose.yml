@@ -9,6 +9,7 @@ services:
             - ./webapp:/webapp
     janus:
         build: .
+        image: demojanus-janus:cand
         ports:
             - "8188:8188"
             - "8189:8189"
@@ -16,6 +17,7 @@ services:
             - "5004:5004/udp"
     videosrc:
         build: gst_test
+        image: demojanus-src:cand
         volumes:
             - /dev/video0:/dev/video0
             - /dev/snd:/dev/snd

@@ -46,7 +46,7 @@ COPY scripts/janus.sh $SCRIPTS_PATH/
 RUN $SCRIPTS_PATH/janus.sh
 
 
-COPY config/janus /janus/etc/janus
+ADD config/janus /janus/etc/janus
 
 EXPOSE 8188 8189 5002/udp 5004/udp
 
