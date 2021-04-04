@@ -10,11 +10,14 @@ services:
     janus:
         build: .
         image: demojanus-janus:cand
-        ports:
-            - "8188:8188"
-            - "8189:8189"
-            - "5002:5002/udp"
-            - "5004:5004/udp"
+        # ports:
+        #     - "8188:8188"
+        #     - "8189:8189"
+        #     - "5002:5002/udp"
+        #     - "5004:5004/udp"
+
+        network_mode: host
+
     videosrc:
         build: gst_test
         image: demojanus-src:cand
