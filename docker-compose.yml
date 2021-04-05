@@ -25,7 +25,7 @@ services:
             - /dev/video0:/dev/video0
             - /dev/snd:/dev/snd
         environment:
-            JANUS_SERVER: janus
+            JANUS_SERVER: 192.168.1.20
             VIDEO_DEVICE:
             ALSA_DEVICE:
         privileged: true
