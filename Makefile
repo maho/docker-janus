@@ -4,7 +4,7 @@
 #
 JANUS_SERVER?=fill_in
 
-run-demo:
+run-server:
 	@if [ $(JANUS_SERVER) = fill_in ];then \
 		 echo "ERROR: set JANUS_SERVER variable to your external ip, eg. make JANUS_SERVER=192.168.1.123";false; \
 	else \

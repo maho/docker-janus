@@ -19,7 +19,7 @@ services:
         network_mode: host
 
     videosrc:
-        build: gst_test
+        build: gst
         image: demojanus-src:cand
         volumes:
             - /dev/video0:/dev/video0
