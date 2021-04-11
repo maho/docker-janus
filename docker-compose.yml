@@ -1,15 +1,13 @@
 version: '3.1'
 services:
     webapp:
-        image: python:3.9
+        build: webapp
         ports:
-            - "8000:8000"
-        command: python3 -m http.server --directory=/webapp
+            - "8000:80"
         volumes:
             - ./webapp:/webapp
     janus:
         build: .
-        image: demojanus-janus:cand
         # ports:
         #     - "8188:8188"
         #     - "8189:8189"
@@ -20,7 +18,6 @@ services:
 
     videosrc:
         build: gst
-        image: demojanus-src:cand
         volumes:
             - /dev/video0:/dev/video0
             - /dev/snd:/dev/snd
