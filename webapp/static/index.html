@@ -25,9 +25,11 @@
             </div>
             <div class='col-12 col-lg-4'>
                 Reward for a dog:
-                <button class='btn btn-primary btn-lg' name='portion' value='1'>SMALL</button>
-                <button class='btn btn-secondary btn-lg' name='portion' value='2'>MEDIUM</button>
-                <button class='btn btn-primary btn-lg' name='portion' value='3'>BIG</button>
+                <div class="d-grid gap-2">
+                    <button class='btn btn-primary btn-lg' name='portion' value='1'>SMALL</button>
+                    <button class='btn btn-secondary btn-lg' name='portion' value='2'>MEDIUM</button>
+                    <button class='btn btn-primary btn-lg' name='portion' value='3'>BIG</button>
+                </div>
             </div>
         </div>
     </div>
@@ -37,7 +39,12 @@
     <script>
         $("button[name=portion]").click(function() {
             var portion=$(this).attr("value")
-            $.post("dispenser/treat/", {'portion': portion})
+
+            var data = JSON.stringify({"portion": portion})
+            $.post({url: "dispenser/treat",
+                    contentType: "application/json"},
+                   data)
+
         })
     </script>
     
