@@ -12,8 +12,7 @@ server {
     }
 
     location /dispenser/treat {
-        proxy_pass http://treatme.home:2477/treat;
-#        proxy_pass http://ustat.home:9999;
+        proxy_pass http://${DISPENSER_HOST}:2477/treat;
     }
 
 }

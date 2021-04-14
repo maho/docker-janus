@@ -6,6 +6,10 @@ services:
             - "8000:80"
         volumes:
             - ./webapp:/webapp
+        restart: on-failure
+        environment:
+            DISPENSER_HOST: ${DISPENSER_HOST:-treatme.home}
+
     janus:
         build: .
         # ports:
