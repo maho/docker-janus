@@ -1,4 +1,4 @@
-# docker-janus
+# Treat a dog with camera preview 
 
 Run up a [janus-gateway](https://github.com/meetecho/janus-gateway) instance using docker, 
 
@@ -15,5 +15,6 @@ Run up a [janus-gateway](https://github.com/meetecho/janus-gateway) instance usi
 
 3. open browser at http://localhost:8000
 
-you should see a view of camera and hear sounds from your microphone
+you should see a view of camera and hear sounds from your microphone. Also you should see
+buttons to send "treat" commands to `upython-vs-dog` ESP32
 
